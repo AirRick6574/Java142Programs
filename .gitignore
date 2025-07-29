@@ -1,0 +1,28 @@
+/bin/
+# macOS system files
+.DS_Store
+
+# Eclipse project files to ignore
+.classpath
+.project
+.settings/
+
+# Eclipse output folders
+bin/
+target/
+
+# Build files (if any)
+build/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# IntelliJ IDEA files (if ever used)
+.idea/
+
+# Misc
+*.swp
