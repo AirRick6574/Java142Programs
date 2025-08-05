@@ -3,9 +3,9 @@
 .DS_Store
 
 # Eclipse project files to ignore
-.classpath
-.project
-.settings/
+#.classpath
+#.project
+#.settings/
 
 # Eclipse output folders
 bin/
