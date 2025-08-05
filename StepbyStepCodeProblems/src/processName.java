@@ -19,9 +19,6 @@ public class processName {
 
 		System.out.println(inputNum + " times 2 = " + inputNumX2);
 
-
-
-
 	}
 	
 	public static void main(String[] args) {
