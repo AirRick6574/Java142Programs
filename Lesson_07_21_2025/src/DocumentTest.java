@@ -19,5 +19,7 @@ public class DocumentTest {
 //		doc2.author = "ALan Turing";
 //		doc2.title = "On Computable Numbers with Applications";
 //		doc2.publicationYear = 1936;
+		
+		System.out.println("Test");
 	}
 }
