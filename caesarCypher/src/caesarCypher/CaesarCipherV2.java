@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
 import java.awt.Frame;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -173,7 +172,7 @@ public class CaesarCipherV2 {
 					
 		String encryptedMessage = new String(letters);
 			
-		System.out.println(encryptedMessage);
+		System.out.println("\nEncrypted Message: " + encryptedMessage);
 		writer.write(encryptedMessage);
 		System.out.println("Message saved in " + messageFile.getName() +
 				" at " + messageFile.getAbsolutePath());
@@ -222,6 +221,7 @@ public class CaesarCipherV2 {
 		
 		while (true) {
 			System.out.print("Enter number of shifts (1 - 25): ");
+			//Check if input is int, save input if it is int
 			if (scanner.hasNextInt()) {
 				shift = scanner.nextInt();
 				scanner.nextLine();  //consume leftover /n from nextInt
@@ -229,9 +229,17 @@ public class CaesarCipherV2 {
 				if (shift < MIN_SHIFT || shift > MAX_SHIFT) {
 					System.out.println("Must enter 1 - 25. Try again.");
 					continue;
-				}
+				} 
+				
 				break;
+			//Check if next input is a string
+			//Restart input prompt if String to prevent endless Loop
+			} else if (scanner.hasNextLine()){
+				System.out.println("This is not a number, please enter a number");
+				scanner.nextLine();
+				continue;
 			}
+			
 			
 		}
 		return shift;
@@ -376,7 +384,7 @@ public class CaesarCipherV2 {
 				writer.close();
 				System.out.println(decryptedMessageFile.getName() + " saved at " +
 				decryptedMessageFile.getAbsolutePath());
-				break;
+				System.exit(0);
 				
 			} else {
 				

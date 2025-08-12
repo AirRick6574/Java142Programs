@@ -280,7 +280,11 @@ public class CaesarCipherAnthonyVersion {
 					continue;
 				}
 				break;
-			}		
+			}	else if (scanner.hasNextLine()) {
+				System.out.println("This is not a number, please enter a number");
+				scanner.nextLine();
+				continue;
+			}
 		}
 		return shift;
 	}
