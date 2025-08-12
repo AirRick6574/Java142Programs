@@ -3,8 +3,11 @@ package caesarCypher;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import javax.swing.JFileChooser;
+
 import java.awt.Choice;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.net.PasswordAuthentication;
 import java.security.PublicKey;
@@ -21,8 +24,9 @@ public class caesarCypher {
 	* Main method for use of testing / finalized implementation
 	* 
 	* @param args Ignored
+	 * @throws FileNotFoundException 
 	*/
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		Scanner ScannerSystem = new Scanner(System.in);
 		
 		//System.out.println(inputShift);
@@ -31,7 +35,15 @@ public class caesarCypher {
 		
 		
 		String systemChoiceString = promptUser(ScannerSystem);
-		String inputMessageString = inputString(ScannerSystem, systemChoiceString);
+		
+		String inputMessageString;
+		
+		if (parseTextFile(ScannerSystem)) {
+			inputMessageString = jFilePullString();
+			//inputMessageString = "Test";
+		} else {
+			inputMessageString = inputString(ScannerSystem, systemChoiceString);
+		}
 		//System.out.println(inputMessageString);
 		char[] testChar = convertStringToArray(inputMessageString);
 		int inputShift = inputShift(ScannerSystem);
@@ -68,6 +80,24 @@ public class caesarCypher {
 			//System.out.println(testChoice);
 			return testChoice;
 		}				
+	}
+	
+	public static boolean parseTextFile(Scanner scanner) {
+		while(true) {
+			System.out.print("Do you want to use a text file. Y/N ");
+			//scanner.nextLine();
+			String inputMessageString = scanner.next();
+			if (inputMessageString.equalsIgnoreCase("Y")) {
+				return true;
+			} else if (inputMessageString.equalsIgnoreCase("N")) {
+				return false;
+			} else {
+				System.out.println("Not valid Repsonse ");
+			}
+		}
+		
+		
+		
 	}
 	
 	public static String inputString(Scanner scanner, String inputChoice) { 
@@ -120,4 +150,16 @@ public class caesarCypher {
 			
 		return wordArray;	
 	}		
+	
+	public static String jFilePullString() throws FileNotFoundException {
+		JFileChooser chooser = new JFileChooser(); //JFileChooser Allows file to be chosen and returns a file path once chosen
+		chooser.showOpenDialog(null); //Pops up an "Open File" file chooser dialog. Note that the text that appears in the approve button is determined by the L&F.
+		Scanner scanner = new Scanner(chooser.getSelectedFile()); 
+		
+		//Delimiter is what is chosen to separate sequences of strings. 
+		scanner.useDelimiter("\\Z"); //changes the delimiter to end of input (\\z) and will read entire scanner text as string. 
+		
+		return scanner.next();
+		
+	}
 }

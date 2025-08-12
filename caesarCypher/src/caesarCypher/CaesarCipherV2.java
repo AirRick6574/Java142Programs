@@ -75,41 +75,16 @@ public class CaesarCipher {
 			}
 			break;
 		}
-		
-		inputDirection = checkDirection(scanner);
-		
-		inputShift = checkShift(scanner);
-		
-		char[] letters = message.toCharArray();
-		
-		performLetterShift(inputDirection, inputShift, letters);
-				
-		String encryptedMessage = new String(letters);
-		
-		System.out.println(encryptedMessage);
-		writer.write(encryptedMessage);
-		System.out.println("Message saved in " + messageFile.getName() +
-				" at " + messageFile.getAbsolutePath());
-		writer.close();
-		
-		File keyFile = new File("key.txt");
-		writer = new FileWriter(keyFile);
-		
-		writer.write(inputDirection + "\n" + inputShift);
-		writer.close();
 			
-		return encryptedMessage;
-		
-		//return encyrptSystem(scanner, messageFile, writer, message);
+		return encyrptSystem(scanner, messageFile, writer, message);
 	}
 
 
 
 	private static String encyrptSystem(Scanner scanner, File messageFile, FileWriter writer, String message)
 			throws IOException {
-		
 		String direction = checkDirection(scanner);
-		
+			
 		int shift = checkShift(scanner);
 			
 		char[] letters = message.toCharArray();
@@ -192,7 +167,7 @@ public class CaesarCipher {
 			System.out.print("Enter number of shifts (1 - 25): ");
 			if (scanner.hasNextInt()) {
 				shift = scanner.nextInt();
-				scanner.nextLine().trim();
+				scanner.nextLine();
 				
 				if (shift < 1 || shift > 25) {
 					System.out.println("Must enter 1 - 25. Try again.");
@@ -214,7 +189,7 @@ public class CaesarCipher {
 		while (true) {
 			System.out.print("Enter direction of shift (left/right): ");
 			//scanner.next();
-			direction = scanner.nextLine().trim();
+			direction = scanner.next();
 			if (direction.toLowerCase().equals("left") ||
 					direction.toLowerCase().equals("l") ||
 					direction.toLowerCase().equals("right") ||
@@ -319,7 +294,7 @@ public class CaesarCipher {
 		while(true) {
 			System.out.print("Do you want to use a text file. Y/N ");
 			//scanner.nextLine();
-			String inputMessageString = scanner.nextLine().trim();
+			String inputMessageString = scanner.next();
 			if (inputMessageString.equalsIgnoreCase("Y")) {
 				return true;
 			} else if (inputMessageString.equalsIgnoreCase("N")) {
