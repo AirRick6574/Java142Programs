@@ -1,5 +1,6 @@
 package caesarCypher;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -171,8 +172,10 @@ public class CaesarCipherV2 {
 		
 		// Ask the user for the shift amount
 		int shift = checkShift(scanner);
-				
+		
+		
 		char[] letters = message.toCharArray();
+		//System.out.println("SYSTEM" + Arrays.toString(letters));
 			
 		// Apply the letter shift based on the chosen direction and shift amount
 		performLetterShift(direction, shift, letters);

@@ -143,7 +143,7 @@ public class caesarCypher {
 			 if (Character.isLowerCase(currentCharacterUnicode)) {
 		            wordArray[i] = (char) ('a' + (currentCharacterUnicode - 'a' + numberShift + 26) % 26);
 		        } else if (Character.isUpperCase(currentCharacterUnicode)) {
-		            wordArray[i] = (char) ('A' + (currentCharacterUnicode) % 26);
+		        	wordArray[i] = (char) ('A' + (currentCharacterUnicode - 'A' + numberShift + 26) % 26);
 		        }
 		        // else: Non-alphabetic character, leave unchanged
 		    }
