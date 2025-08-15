@@ -47,7 +47,7 @@ public class GeussingGame {
 				String guessString = readGuessInput(console);
 			
 				//Check length of guessString and rerun until appropriate length 
-				if
+				//if
 				
 			//Parse the guess sequence 
 			int[] parsedGeuss = parseGuess(guessString);
@@ -72,6 +72,7 @@ public class GeussingGame {
 		
 		System.out.println(Arrays.toString(createSecretSequence(4, 6)));
 		displayWinMessage();
+		}
 	}
 	
 	/**
