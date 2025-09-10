@@ -1,0 +1,13 @@
+Text For Navigating and Updating Files
+-By Erick Ruiz for Erick Ruiz (lol)
+
+For Mac and Windows
+
+Created 9/4/2025
+Last Updated 9/4/2025
+
+------Creating new Projects------
+	-Go to Create new java project
+	-Find Java142Programs Folder, create new folder for project while in folder finder
+	-Once new folder inside Java142Program has been created and named
+	-Select new named folder and create project
