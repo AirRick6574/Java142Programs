@@ -6,7 +6,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.PageAttributes.OriginType;
+import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +21,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -53,7 +58,7 @@ public class v2InputCaseTracker {
 	private JButton button; 
 	private JPanel panel; 
 	
-	public v2InputCaseTracker() {
+	public v2InputCaseTracker() throws IOException {
 		/*
 		frame = new JFrame();
 	 	frame.setAlwaysOnTop(true);  // force top
@@ -93,27 +98,72 @@ public class v2InputCaseTracker {
 		frame.setVisible(true);
 		*/
 		
+		//-------------FRAMES------------------------------
+		
 		// Create the JFrame
         JFrame frame = new JFrame("Sized Panel Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 400); // Set initial frame size
         frame.setBackground(Color.RED); // Set a background color for visibility
-
+        
+        
+        //-------------- PANELS------------------------------
+        
+        JPanel titleJPanel = new JPanel();
+        titleJPanel.setBackground(Color.RED); // Set a background color for visibility
+        
+        JPanel leftColumn = new JPanel();
+        leftColumn.setBackground(Color.RED); // Set a background color for visibility
+        
         // Create the JPanel
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.LIGHT_GRAY); // Set a background color for visibility
+        JPanel caseNumberPanels = new JPanel();
+        caseNumberPanels.setBackground(Color.LIGHT_GRAY); // Set a background color for visibility
+        
+        // Create the JPanel
+        JPanel caseTypeJPanel = new JPanel();
+        caseTypeJPanel.setBackground(Color.LIGHT_GRAY); // Set a background color for visibility
         
         //Create a wrapper with FlowLayout (centers it & respects preferred size)
         JPanel caseCountJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 25));
         caseCountJPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         
         
-        //Create a wrapper with FlowLayout (centers it & respects preferred size)
-        JPanel wrapper = new JPanel(new BorderLayout(10, 0)); 
         
-        int rows = 3;
-		int cols = 6;
-		panel.setLayout(new GridLayout(rows, cols, 0, 0));
+        
+        //----------------------WRAPPER--------------------
+        
+        //Create a wrapper with FlowLayout (centers it & respects preferred size)
+        JPanel wrapper = new JPanel(new BorderLayout(0, 0)); 
+        
+        //---------------------LABELS
+        JLabel caseManagerLabel = new JLabel("CASE MANAGER SYSTEM");
+		titleJPanel.add(caseManagerLabel);
+		titleJPanel.setBackground(Color.DARK_GRAY);
+		caseManagerLabel.setForeground(Color.black);
+		titleJPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+		JButton standardButton = new JButton("Standard Cases");
+		JButton TBDButton = new JButton("TBD Cases");
+		JButton TBD2Button = new JButton("TBD2 Cases");
+		
+		
+		int rows = 4;
+		int cols = 1; 
+		leftColumn.setLayout(new GridLayout(rows,cols, 0, 0));
+		// Fill grid and add borders (Numbers Panel grid)
+		for (int i = 0; i < rows * cols; i++) {
+			JPanel cell = new JPanel();
+			cell.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));    
+			leftColumn.add(cell);
+		}
+		
+		// Set the preferred size of the panel
+        leftColumn.setPreferredSize(new Dimension(70, 125)); // Set preferred width and height
+		
+		
+        rows = 4;
+		cols = 6;
+		caseNumberPanels.setLayout(new GridLayout(rows, cols, 0, 0));
 		
 		// Fill grid and add borders (Numbers Panel grid)
 		for (int i = 0; i < rows * cols; i++) {
@@ -123,28 +173,54 @@ public class v2InputCaseTracker {
 			if (i < 6) {
 			    // Set the preferred size of the panel
 				JLabel label = new JLabel(caseManagerNames[i]);
+				label.setForeground(Color.black);
 				cell.add(label);
 				cell.setBackground(Color.GRAY);
 			}
 			
 			if (i > 5 && i < 12) {
+			    // Make this particular cell vertical
+			    cell.setLayout(new BoxLayout(cell, BoxLayout.Y_AXIS));
+				
 				// Set the preferred size of the panel
 				JLabel label = new JLabel(String.valueOf(caseManagersCases[i-6]));
 				cell.add(label);
+
+		        // Load the image
+				// 1. Load the original image
+	            BufferedImage originalImage = ImageIO.read(new File("test.jpg"));
+
+	            // 2. Resize the image
+	            // getScaledInstance returns a new Image object scaled to the specified dimensions
+	            Image scaledImage = originalImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+
+	            // 3. Create an ImageIcon from the scaled Image
+	            ImageIcon imageIcon = new ImageIcon(scaledImage);
+	            
+		        // Create a JLabel with the image
+		        JLabel imageLabel = new JLabel(imageIcon);
+		        imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		        cell.add(imageLabel);
+		        
+		        label.setHorizontalAlignment(JLabel.CENTER);
+		        label.setHorizontalTextPosition(JLabel.CENTER);
 			}
 			
 			if (i > 5) {
 				cell.setBackground(Color.LIGHT_GRAY);
 			}	    
-			panel.add(cell);
+			caseNumberPanels.add(cell);
 		}
 		
 
         // Set the preferred size of the panel
-        panel.setPreferredSize(new Dimension(800, 125)); // Set preferred width and height
+        caseNumberPanels.setPreferredSize(new Dimension(800, 125)); // Set preferred width and height
         
         wrapper.add(caseCountJPanel, BorderLayout.NORTH);
-        wrapper.add(panel, BorderLayout.CENTER);
+        wrapper.add(caseNumberPanels, BorderLayout.CENTER);
+        wrapper.add(titleJPanel, BorderLayout.NORTH);
+        wrapper.add(leftColumn, BorderLayout.WEST);
+        
        
 
         // Pack the frame to adjust its size based on preferred sizes of components
@@ -274,7 +350,7 @@ public class v2InputCaseTracker {
 		    }
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		getFileInformation();
 		new v2InputCaseTracker(); // Call Constructor to create window
 		
