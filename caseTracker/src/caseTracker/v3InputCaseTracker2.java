@@ -30,7 +30,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class v2InputCaseTracker {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+
+public class v3InputCaseTracker2 extends Application {
 	
 	//Total CaseManagers Currently
 	public static final int TOTAL_CASE_MANAGERS = 6; 
@@ -58,145 +62,11 @@ public class v2InputCaseTracker {
 	private JButton button; 
 	private JPanel panel; 
 	
-	public v2InputCaseTracker() throws IOException {
+	//Java FX STUFF 
+	
+	
+	public v3InputCaseTracker2() throws IOException {
 		
-		//-------------FRAMES------------------------------
-		
-		// Create the JFrame
-        JFrame frame = new JFrame("Sized Panel Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 400); // Set initial frame size
-        frame.setBackground(Color.RED); // Set a background color for visibility
-        
-        
-        //-------------- PANELS------------------------------
-        
-        JPanel titleJPanel = new JPanel();
-        titleJPanel.setBackground(Color.RED); // Set a background color for visibility
-        
-        JPanel leftColumn = new JPanel();
-        leftColumn.setBackground(Color.RED); // Set a background color for visibility
-        
-        // Create the JPanel
-        JPanel caseNumberPanels = new JPanel();
-        caseNumberPanels.setBackground(Color.LIGHT_GRAY); // Set a background color for visibility
-        
-        // Create the JPanel
-        JPanel caseTypeJPanel = new JPanel();
-        caseTypeJPanel.setBackground(Color.LIGHT_GRAY); // Set a background color for visibility
-        
-        //Create a wrapper with FlowLayout (centers it & respects preferred size)
-        JPanel caseCountJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 25));
-        caseCountJPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        
-        
-        
-        
-        //----------------------WRAPPER--------------------
-        
-        //Create a wrapper with FlowLayout (centers it & respects preferred size)
-        JPanel wrapper = new JPanel(new BorderLayout(0, 0)); 
-        
-        //---------------------LABELS
-        JLabel caseManagerLabel = new JLabel("CASE MANAGER SYSTEM");
-		titleJPanel.add(caseManagerLabel);
-		titleJPanel.setBackground(Color.DARK_GRAY);
-		caseManagerLabel.setForeground(Color.black);
-		titleJPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
-		JButton standardButton = new JButton("Standard Cases");
-		JButton TBDButton = new JButton("TBD Cases");
-		JButton TBD2Button = new JButton("TBD2 Cases");
-		
-		
-		int rows = 4;
-		int cols = 1; 
-		leftColumn.setLayout(new GridLayout(rows,cols, 0, 0));
-		// Fill grid and add borders (Numbers Panel grid)
-		for (int i = 0; i < rows * cols; i++) {
-			JPanel cell = new JPanel();
-			cell.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));    
-			leftColumn.add(cell);
-		}
-		
-		// Set the preferred size of the panel
-        leftColumn.setPreferredSize(new Dimension(70, 125)); // Set preferred width and height
-		
-		
-        rows = 4;
-		cols = 6;
-		caseNumberPanels.setLayout(new GridLayout(rows, cols, 0, 0));
-		
-		// Fill grid and add borders (Numbers Panel grid)
-		for (int i = 0; i < rows * cols; i++) {
-			JPanel cell = new JPanel();
-			cell.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-			
-			if (i < 6) {
-			    // Set the preferred size of the panel
-				JLabel label = new JLabel(caseManagerNames[i]);
-				label.setForeground(Color.black);
-				cell.add(label);
-				cell.setBackground(Color.GRAY);
-			}
-			
-			if (i > 5 && i < 12) {
-			    // Make this particular cell vertical
-			    cell.setLayout(new BoxLayout(cell, BoxLayout.Y_AXIS));
-				
-				// Set the preferred size of the panel
-				JLabel label = new JLabel(String.valueOf(caseManagersCases[i-6]));
-				cell.add(label);
-
-		        // Load the image
-				// 1. Load the original image
-	            BufferedImage originalImage = ImageIO.read(new File("test.jpg"));
-
-	            // 2. Resize the image
-	            // getScaledInstance returns a new Image object scaled to the specified dimensions
-	            Image scaledImage = originalImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-
-	            // 3. Create an ImageIcon from the scaled Image
-	            ImageIcon imageIcon = new ImageIcon(scaledImage);
-	            
-		        // Create a JLabel with the image
-		        JLabel imageLabel = new JLabel(imageIcon);
-		        imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		        cell.add(imageLabel);
-		        
-		        label.setHorizontalAlignment(JLabel.CENTER);
-		        label.setHorizontalTextPosition(JLabel.CENTER);
-			}
-			
-			if (i > 5) {
-				cell.setBackground(Color.LIGHT_GRAY);
-			}	    
-			caseNumberPanels.add(cell);
-		}
-		
-
-        // Set the preferred size of the panel
-        caseNumberPanels.setPreferredSize(new Dimension(800, 125)); // Set preferred width and height
-        
-        wrapper.add(caseCountJPanel, BorderLayout.NORTH);
-        wrapper.add(caseNumberPanels, BorderLayout.CENTER);
-        wrapper.add(titleJPanel, BorderLayout.NORTH);
-        wrapper.add(leftColumn, BorderLayout.WEST);
-        
-       
-
-        // Pack the frame to adjust its size based on preferred sizes of components
-        // Note: If you want a fixed frame size, you might call setSize() after pack()
-        // or just rely on setSize() if you don't care about components' preferred sizes.
-        
-        
-        frame.add(wrapper, BorderLayout.CENTER);
-
-        // Center the frame on the screen
-        frame.setLocationRelativeTo(null);
-
-        // Make the frame visible
-        frame.setVisible(true);
     }
 
 	
@@ -313,8 +183,10 @@ public class v2InputCaseTracker {
 	}
 	
 	public static void main(String[] args) throws IOException {
+		System.out.print(islegalTurn());
+		launch(args);
 		getFileInformation();
-		new v2InputCaseTracker(); // Call Constructor to create window
+		new v3InputCaseTracker2(); // Call Constructor to create window
 		
 		while (true) {
 			
@@ -337,6 +209,19 @@ public class v2InputCaseTracker {
 		}
 		
 	}
+	
+	
+	//Stage is entire window
+	//Scene is content inside window
+	//
+	
+	
+	//Main Java fx Code
+		@Override
+		public void start(Stage primaryStage) throws Exception {
+			primaryStage.setTitle("PenisWindow");
+		}
+	
 }
 
 
