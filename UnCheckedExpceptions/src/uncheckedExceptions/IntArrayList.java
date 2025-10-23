@@ -89,6 +89,8 @@ public class IntArrayList {
 		a[i] = e; 
 	}
 	
+	
+	//NON CONSTANT TIME SINCE IT CALLS ARRAYS.TOSTRING
 	@Override
 	public String toString() {
 		return "IntArrayList [a=" + Arrays.toString(a) + ", length=" + length + "]";
