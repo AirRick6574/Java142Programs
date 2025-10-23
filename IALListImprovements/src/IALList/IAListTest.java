@@ -100,6 +100,8 @@ public class IAListTest {
 				}
 				for (int j = 1; j < a.size(); j++) {
 					if (a.get(j) != 9-i+j) {
+						System.out.println("Expected " + (9-i+j));
+						System.out.println("Actual " + a.get(j));
 						throw new RuntimeException("After addBefore-ing "+(i+2)+" values, calling a.get("+j+") did not retrieve the correct value!");
 					}
 				}
