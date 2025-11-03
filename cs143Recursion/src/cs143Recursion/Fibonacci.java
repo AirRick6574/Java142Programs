@@ -61,10 +61,11 @@ public class Fibonacci {
 		else {
 			//calculate the fibonacci number, store it
 			// in the array for future access 
-			fibA[n]
+			fibA[n] = fib(n - 1) + fib(n - 2);
+			return fibA[n];
 		}
 		
 		
-		return 0;
+	
 	}
 }

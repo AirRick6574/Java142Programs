@@ -65,7 +65,7 @@ public class IAList {
 			for (int i = 0; i < length; i++) {
 				//Make sure they are each using their respected spacing from each array 
 				//b = [0,0,2,3,0,0] start = 2
-				//a = [0,2,3,0] start = 1
+				//a =  0[0,2,3,0]0 start = 1
 				b[newStart + i] = a[i + start];
 				
 			}
