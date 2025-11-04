@@ -21,7 +21,12 @@ public class DigitUp {
 				return (n + 9) % 10;
 			}
 		} else {
-			return 10 * DigitupDigitDown(n / 10) + (n + 1) % 10;
+			if (n % 2 == 0) {
+				return 10 * DigitupDigitDown(n / 10) + (n + 1) % 10;
+			} else {
+				return 10 * DigitupDigitDown(n / 10) + (n + 9) % 10;
+			}
+			
 		}
 	}
 	
@@ -36,7 +41,7 @@ public class DigitUp {
 		System.out.println();
 		System.out.println(DigitupDigitDown(7)); //6
 		System.out.println(DigitupDigitDown(42)); //53
-		System.out.println(DigitupDigitDown(385)); //296
+		System.out.println(DigitupDigitDown(385)); //294
 		System.out.println(DigitupDigitDown(-790)); //-681
 		System.out.println(DigitupDigitDown(89294)); //98385
 	}
